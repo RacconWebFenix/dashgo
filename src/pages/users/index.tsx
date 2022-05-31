@@ -10,10 +10,12 @@ import {
   Td,
   Text,
   Th,
+  Thead,
   Tr,
 } from "@chakra-ui/react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
+import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UsersList() {
@@ -40,14 +42,16 @@ export default function UsersList() {
           </Flex>
 
           <Table colorScheme="whiteAlpha">
-            <Tr>
-              <Th px="6" color="gray.300" width="8">
-                <Checkbox colorScheme="pink" />
-              </Th>
-              <Th>Usuário</Th>
-              <Th>Data de Cadastro</Th>
-              <Th width="8"></Th>
-            </Tr>
+            <Thead>
+              <Tr>
+                <Th px="6" color="gray.300" width="8">
+                  <Checkbox colorScheme="pink" />
+                </Th>
+                <Th>Usuário</Th>
+                <Th>Data de Cadastro</Th>
+                <Th width="8"></Th>
+              </Tr>
+            </Thead>
             <Tbody>
               <Tr>
                 <Td px="6">
@@ -126,6 +130,7 @@ export default function UsersList() {
               </Tr>
             </Tbody>
           </Table>
+          <Pagination />
         </Box>
       </Flex>
     </Box>
