@@ -4,6 +4,7 @@ import { Header } from "../components/Header";
 import dynamic from "next/dynamic";
 import { ApexOptions } from "apexcharts";
 import { Sidebar } from "../components/SideBar";
+import { useState } from "react";
 const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 const options: ApexOptions = {
@@ -62,6 +63,11 @@ const series = [
 ];
 
 export default function Dashboard() {
+  const [showChart, setShowChart] = useState<boolean>(false);
+
+  setTimeout(() => {
+    setShowChart(true);
+  }, 1);
   return (
     <Flex direction="column" h="100vh">
       <Header />
@@ -74,13 +80,27 @@ export default function Dashboard() {
             <Text fontSize="lg" mb="4">
               Inscritos da semana
             </Text>
-            <Chart options={options} series={series} type="area" height={160} />
+            {showChart && (
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={160}
+              />
+            )}
           </Box>
           <Box p="8" bg="gray.800" borderRadius={8}>
             <Text fontSize="lg" mb="4">
               Taxa de abertura
             </Text>
-            <Chart options={options} series={series} type="area" height={160} />
+            {showChart && (
+              <Chart
+                options={options}
+                series={series}
+                type="area"
+                height={160}
+              />
+            )}
           </Box>
         </SimpleGrid>
       </Flex>

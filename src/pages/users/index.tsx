@@ -14,6 +14,7 @@ import {
   Tr,
   useBreakpointValue,
 } from "@chakra-ui/react";
+import Link from "next/link";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 
@@ -37,15 +38,17 @@ export default function UsersList() {
             <Heading size="lg" fontWeight="normal">
               Usuarios
             </Heading>
-            <Button
-              as="a"
-              size="sm"
-              fontSize="small"
-              colorScheme="pink"
-              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-            >
-              Criar Novo
-            </Button>
+            <Link href="/users/create" passHref>
+              <Button
+                as="a"
+                size="sm"
+                fontSize="small"
+                colorScheme="pink"
+                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+              >
+                Criar Novo
+              </Button>
+            </Link>
           </Flex>
 
           <Table colorScheme="whiteAlpha">
@@ -72,7 +75,6 @@ export default function UsersList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>04 de abril de 2021</Td>}
-     
               </Tr>
               <Tr>
                 <Td px={["4", "4", "6"]}>
@@ -87,7 +89,6 @@ export default function UsersList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>04 de abril de 2021</Td>}
-     
               </Tr>
               <Tr>
                 <Td px={["4", "4", "6"]}>
@@ -102,7 +103,6 @@ export default function UsersList() {
                   </Box>
                 </Td>
                 {isWideVersion && <Td>04 de abril de 2021</Td>}
-     
               </Tr>
             </Tbody>
           </Table>
