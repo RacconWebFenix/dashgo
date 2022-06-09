@@ -26,7 +26,21 @@ import { Sidebar } from "../../components/SideBar";
 export default function UsersList() {
   const { data, isLoading, error } = useQuery("users", async () => {
     const response = await fetch("http://localhost:3000/api/users");
-    return await response.json();
+    const data = await response.json();
+
+    const users = data.users.map((users) => {
+      return {
+        id: users.id,
+        name: users.name,
+        createdAt: new Date(users.createdAt).toLocaleDateString("pt-BR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        }),
+      };
+    });
+
+    return users;
   });
 
   const isWideVersion = useBreakpointValue({
@@ -79,48 +93,24 @@ export default function UsersList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  <Tr>
-                    <Td px={["4", "4", "6"]}>
-                      <Checkbox colorScheme="pink" />
-                    </Td>
-                    <Td>
-                      <Box>
-                        <Text fontWeight="bold">Marcos César Domingues</Text>
-                        <Text fontSize="small" color="gray.300">
-                          dfenixweb@gmail.com
-                        </Text>
-                      </Box>
-                    </Td>
-                    {isWideVersion && <Td>04 de abril de 2021</Td>}
-                  </Tr>
-                  <Tr>
-                    <Td px={["4", "4", "6"]}>
-                      <Checkbox colorScheme="pink" />
-                    </Td>
-                    <Td>
-                      <Box>
-                        <Text fontWeight="bold">Marcos César Domingues</Text>
-                        <Text fontSize="small" color="gray.300">
-                          dfenixweb@gmail.com
-                        </Text>
-                      </Box>
-                    </Td>
-                    {isWideVersion && <Td>04 de abril de 2021</Td>}
-                  </Tr>
-                  <Tr>
-                    <Td px={["4", "4", "6"]}>
-                      <Checkbox colorScheme="pink" />
-                    </Td>
-                    <Td>
-                      <Box>
-                        <Text fontWeight="bold">Marcos César Domingues</Text>
-                        <Text fontSize="small" color="gray.300">
-                          dfenixweb@gmail.com
-                        </Text>
-                      </Box>
-                    </Td>
-                    {isWideVersion && <Td>04 de abril de 2021</Td>}
-                  </Tr>
+                  {data.map((user) => {
+                    return (
+                      <Tr key={user.id}>
+                        <Td px={["4", "4", "6"]}>
+                          <Checkbox colorScheme="pink" />
+                        </Td>
+                        <Td>
+                          <Box>
+                            <Text fontWeight="bold">{user.name}</Text>
+                            <Text fontSize="small" color="gray.300">
+                              {user.email}
+                            </Text>
+                          </Box>
+                        </Td>
+                        {isWideVersion && <Td>{user.createdAt}</Td>}
+                      </Tr>
+                    );
+                  })}
                 </Tbody>
               </Table>
 
