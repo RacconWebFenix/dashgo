@@ -19,11 +19,9 @@ import Link from "next/link";
 import { RiAddLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
 
-
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/SideBar";
 import { useUsers } from "../../services/hooks/useUsers";
-
 
 export default function UsersList() {
   const { data, isLoading, error, isFetching } = useUsers();
@@ -102,7 +100,11 @@ export default function UsersList() {
                 </Tbody>
               </Table>
 
-              <Pagination />
+              <Pagination
+                totalCountOfRegisters={200}
+                currentPage={4}
+                onPageChange={(e) => e}
+              />
             </>
           )}
         </Box>
