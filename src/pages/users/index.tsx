@@ -18,37 +18,15 @@ import {
 import Link from "next/link";
 import { RiAddLine } from "react-icons/ri";
 import { Header } from "../../components/Header";
-import { useQuery } from "react-query";
+
 
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/SideBar";
-import { api } from "../../services/api";
+import { useUsers } from "../../services/hooks/useUsers";
+
 
 export default function UsersList() {
-  const { data, isLoading, error, isFetching } = useQuery(
-    "users",
-    async () => {
-      const response = await api.get("users");
-      const { data } = response;
-
-      const users = data.users.map((users) => {
-        return {
-          id: users.id,
-          name: users.name,
-          createdAt: new Date(users.createdAt).toLocaleDateString("pt-BR", {
-            day: "2-digit",
-            month: "long",
-            year: "numeric",
-          }),
-        };
-      });
-
-      return users;
-    },
-    {
-      staleTime: 1000 * 5, // 5 segundos
-    }
-  );
+  const { data, isLoading, error, isFetching } = useUsers();
 
   const isWideVersion = useBreakpointValue({
     base: false,
