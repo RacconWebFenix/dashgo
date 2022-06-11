@@ -37,7 +37,7 @@ export default function UsersList() {
     lg: true,
   });
 
-  async function handlePrefetchUser(userId: number) {
+  async function handlePrefetchUser(userId: string) {
     await queryCliente.prefetchQuery(
       ["user", userId],
       async () => {
@@ -110,7 +110,7 @@ export default function UsersList() {
                             <Link
                               color="purple.400"
                               onMouseEnter={() =>
-                                handlePrefetchUser(Number(user.id))
+                                handlePrefetchUser(user.id)
                               }
                             >
                               <Text fontWeight="bold">{user.name}</Text>
